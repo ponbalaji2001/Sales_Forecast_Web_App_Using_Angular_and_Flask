@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="text-center">
+                    <h1>Sign Up</h1>
+                    <h6>Register Yourself !</h6>
+                </div>
+                <form (ngSubmit)="onsubmit()" #myForm="ngForm">
+                    <div class="mb-3">
+                        <label for="exampleFullName" class="form-label">Full Name</label>
+                        <input type="text" [(ngModel)]="fullName" name="_Name" class="form-control" id="exampleFullName" ngModel required #sname="ngModel">
+                        <div>
+                            <small *ngIf="sname.invalid && sname.touched">(*name is required)</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleEmail" class="form-label">Email address</label>
+                        <input type="email" [(ngModel)]="email" name="_Email" class="form-control" id="exampleEmail" ngModel required email #semail="ngModel">
+                        <div>
+                             <small *ngIf="semail.errors && semail.errors['required'] && semail.touched">(*email is required)</small>
+                             <small *ngIf="semail.errors && semail.errors['email'] && semail.touched">(*email is invalid)</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="examplePassword" class="form-label">Password</label>
+                        <div style="display: flex; justify-content: space-between;">
+                            <input [type]="showpassword?'text':'password' " [(ngModel)]="password" name="_Password"
+                                class="form-control" id="examplePassword" ngModel required #spassword="ngModel" style="border-radius: 0.375rem 0 0 0.375rem ">
+                            <i (click)="passwordShow()" class="fa fa-eye eye" *ngIf="showpassword"></i>
+                            <i (click)="passwordShow()" class="fa fa-eye-slash eye" *ngIf="!showpassword"></i>
+                        </div>
+                        <div>
+                          <small class="passValid" *ngIf="spassword.invalid && spassword.touched">(*password is required)</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleConfirmPassword" class="form-label">Confirm Password</label>
+                        <div style="display: flex; justify-content: space-between;">
+                            <input [type]="showConfirmPassword?'text':'password' " [(ngModel)]="confirmPassword" name="_ConfirmPassword" class="form-control"
+                            id="exampleConfirmPassword" ngModel required #sconfirmPassword="ngModel" style="border-radius: 0.375rem 0 0 0.375rem ">
+                            <i (click)="confirmPasswordShow()" class="fa fa-eye eye2" *ngIf="showConfirmPassword"></i>
+                            <i (click)="confirmPasswordShow()" class="fa fa-eye-slash eye2" *ngIf="!showConfirmPassword"></i>
+                        </div>
+                        <div>
+                                <small *ngIf="sconfirmPassword.invalid && sconfirmPassword.touched">(*confirm password is required)</small>
+                        </div>
+                        <div>
+                            <small class="confirmValid" *ngIf="(!spassword.invalid && !sconfirmPassword.invalid) && password !== confirmPassword">(*Password and Confirm Password must be same)</small>
+                        </div>
+                    </div>
+                    <button type="submit" (click)="AddUser()" class="btn btn-primary mb-2" [disabled]="!myForm.valid">Sign Up</button>
+                </form>
+                <a routerLink="/login">Already Registered? Click to Login</a>
+            </div>
+        </div>
+    </div>
+</div>

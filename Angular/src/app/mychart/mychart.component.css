@@ -1,0 +1,17 @@
+.canva{
+    margin-left: auto;
+    margin-right: auto;
+}
+h6{
+    text-align: center;
+}
+
+button{
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+p{
+    font-size: small;
+}

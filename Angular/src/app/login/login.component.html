@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="text-center">
+                    <h1>Login</h1>
+                    <h6>Please enter email & password !</h6>
+                </div>
+               <form (ngSubmit)="onsubmit()" #myForm="ngForm">
+                <div class="mb-3">
+                    <label for="exampleEmail" class="form-label">Email address</label>
+                    <input type="email" class="form-control" name="_Email" [(ngModel)]="email" id="exampleEmail" ngModel required #semail="ngModel">
+                    <div>
+                        <small *ngIf="semail.invalid && semail.touched">(*email is required)</small>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="examplePassword" class="form-label">Password</label>
+                    <input [type]="showpassword?'text':'password' " class="form-control" name="_Password" [(ngModel)]="password" id="examplePassword" ngModel required #spassword="ngModel">
+                    <i (click)="toggleShow()" class="fa fa-eye eye" *ngIf="showpassword && !spassword.invalid"></i>
+                    <i (click)="toggleShow()" class="fa fa-eye-slash eye" *ngIf="!showpassword && !spassword.invalid"></i>
+                    <div>
+                        <small *ngIf="spassword.invalid && spassword.touched">(*password is required)</small>
+                    </div>
+                </div>
+                <button (click)="login()" type="submit" class="btn btn-primary mb-2" [disabled]="!myForm.valid">Login</button>
+            </form>
+            <a routerLink="/signup">New user? Click to SignUp</a>
+            </div>
+        </div>
+    </div>
+</div>

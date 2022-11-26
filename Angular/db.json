@@ -1,0 +1,40 @@
+{
+  "UserData": [
+    {
+      "id": 1,
+      "Name": "Balaji",
+      "Email": "balaji498@gmail.com",
+      "Password": "balaji498"
+    },
+    {
+      "Name": "Ram",
+      "Email": "ram123@gmail.com",
+      "Password": "ram123",
+      "id": 2
+    },
+    {
+      "Name": "Arjun",
+      "Email": "arjun789@gmail.com",
+      "Password": "arjun789",
+      "id": 3
+    },
+    {
+      "Name": "Shami",
+      "Email": "shami999@gmail.com",
+      "Password": "shami999",
+      "id": 4
+    },
+    {
+      "Name": "Yuvan",
+      "Email": "yuvan123@gmail.com",
+      "Password": "yuvan123",
+      "id": 5
+    },
+    {
+      "Name": "Aswin",
+      "Email": "aswin123@gmail.com",
+      "Password": "aswin123",
+      "id": 6
+    }
+  ]
+}

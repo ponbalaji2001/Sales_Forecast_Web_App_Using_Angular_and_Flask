@@ -1,0 +1,30 @@
+<button class="btn btn-primary btn-sm" (click)="makePDF()">Download</button>
+<br>
+<div class="Report" id="content">
+<br>
+  <!--Forecast Graph-->
+  <div class="canva" style="width: 90%">
+        <h6>Sales Forecast</h6>
+        <canvas baseChart 
+        [chartType]="'line'" 
+        [legend]="true" 
+        [datasets]="chartData" 
+        [labels]="chartLabels"
+        [options]="chartOptions">
+        </canvas>
+   </div>
+<br>
+<br>
+<br>
+    <!--Graph of Performance Metrics-->
+    <div class="canva" style="width: 90%">
+        <h6>Performance Measures</h6>
+        <canvas baseChart 
+        [chartType]="'line'" 
+        [legend]="true" 
+        [datasets]="chartData2" 
+        [labels]="chartLabels2"
+        [options]="chartOptions2">
+        </canvas>
+    </div>
+</div>

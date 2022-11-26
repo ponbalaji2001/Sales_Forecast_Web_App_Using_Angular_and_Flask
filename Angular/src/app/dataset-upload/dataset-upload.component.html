@@ -1,0 +1,47 @@
+<div class="LogoutBtn">
+<button type="submit" class="btn btn-primary btn-sm" (click)="logout()">Logout</button>
+</div>
+<div class="container">
+    <h5>Hi, {{name}}</h5>
+    <br>
+    <div class="card">
+        <div class="card-header">
+           <h6>Upload your dataset</h6>
+        </div>
+        <div class="card-body">
+         <form (ngSubmit)="onsubmit()" #myForm="ngForm" action="/upload" method="POST" enctype = "multipart/form-data" v-on:change="Uploadfile">
+            <input type="file" (change)="uploadFile(file)" #file name="file" value="Upload file" ngModel required #_file="ngModel">
+            <div>
+                <small *ngIf="_file.invalid && _file.touched">*File is required</small>
+            </div>
+            <br>
+          </form>
+          <form (ngSubmit)="onsubmit()" #myForm="ngForm" action="/input" method="POST" enctype="multipart/form-data" >
+            <label class="form-label">Select Your Forecast Range</label>
+            <select class="form-select" aria-label="Default select example" name="rang" [(ngModel)]="rang" ngModel required #_rang="ngModel">
+                <option selected>select</option>
+                <option>Year</option>
+                <option>Month</option>
+                <option>Week</option>
+                <option>Day</option>
+            </select>
+            <div>
+                <small *ngIf="_rang.invalid && _rang.touched">*Forecast range is required</small>
+            </div>
+            <br>
+            <label class="form-label">Enter Your Forecast Value</label>
+            <input class="form-control" type="number" name="val" min="1" [(ngModel)]="val" ngModel required #_val="ngModel">
+            <div>
+                <small *ngIf="_val.invalid && _val.touched">*Forecast value is required</small>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" (click)=" submitData()"  [disabled]="!myForm.valid">SUBMIT</button>
+        </form>
+        <div *ngIf="show">
+            <br>
+            <span class="spinner-border spinner-border-sm"></span>
+            Processing data...
+        </div>
+      </div>
+    </div>
+</div>
