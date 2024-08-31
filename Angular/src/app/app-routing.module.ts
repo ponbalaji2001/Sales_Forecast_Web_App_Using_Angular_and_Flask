@@ -9,7 +9,7 @@ const routes: Routes = [
   {path:'', redirectTo:'login',pathMatch:'full'},
   {path:'login', component:LoginComponent},
   {path:'signup', component:SignupComponent},
-  {path:'datasetUpload',component:DatasetUploadComponent},
+  {path:'forecast',component:DatasetUploadComponent},
   {path:'chart', component:MychartComponent}
 
 

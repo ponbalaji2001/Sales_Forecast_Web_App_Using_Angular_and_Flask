@@ -10,6 +10,12 @@ button{
     float: right;
     margin-top: 10px;
     margin-right: 10px;
+    width: 80px;
+}
+
+button a{
+    color: white;
+    text-decoration: none;
 }
 
 p{

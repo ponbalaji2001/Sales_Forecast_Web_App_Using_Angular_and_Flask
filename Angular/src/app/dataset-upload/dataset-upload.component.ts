@@ -19,10 +19,13 @@ export class DatasetUploadComponent implements OnInit {
   ) {}
 
   @ViewChild('myForm') form: NgForm;
-  rang: string;
-  val: string;
+  datasetType: string = 'select a value';
+  dateIndex: number;
+  salesIndex: number;
+  forecastPeriod: string = 'select a value';
+  numberOfPeriod: number;
   show: boolean = false;
-  name: any;
+  name: string;
   filename: any;
 
   ngOnInit(): void {
@@ -65,11 +68,15 @@ export class DatasetUploadComponent implements OnInit {
       'Content-Type': 'application/json',
     });
 
-    //sent the forecast range and value to the Flask
+    //forecast sales
     this.http
       .post(
-        'http://127.0.0.1:5000/input',
-        { rang: this.rang, val: this.val },
+        'http://127.0.0.1:5000/forecast',
+        { datasetType: this.datasetType, 
+          dateIndex: this.dateIndex, 
+          salesIndex: this.salesIndex,
+          forecastPeriod: this.forecastPeriod, 
+          numberOfPeriod: this.numberOfPeriod },
         { headers: headers }
       )
       .subscribe(
@@ -91,7 +98,9 @@ export class DatasetUploadComponent implements OnInit {
             res['mse'],
             res['mae']
           );
-          this.router.navigate(['chart']);
+        
+        this.show = false;
+        this.router.navigate(['chart']);
         },
         (error: any) => {
           console.log(error);
@@ -105,7 +114,10 @@ export class DatasetUploadComponent implements OnInit {
 
   logout() {
     this.router.navigate(['login']);
+    localStorage.clear();
   }
+
+  
 }
 
 

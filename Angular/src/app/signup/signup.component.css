@@ -18,13 +18,16 @@ label,p{
     color: #fff;
 }
 
+label{
+    margin-bottom: 3px;
+}
+
 a{
     color: #fff;
     margin-top: 10px;
 }
 
 input.ng-invalid.ng-touched{
-
     border:red 1.6px solid;
 }
 
@@ -33,17 +36,16 @@ small{
 }
 
 .eye{
-   padding: .5rem .75rem 0.25rem .75rem;
-   border: 2px solid #fff;
-   background-color: #fff;
-   border-radius: 0 0.375rem 0.375rem 0;
+    position: absolute;
+    right: 50px;
 }
 
-.eye2 {
-    padding: .5rem .75rem 0.25rem .75rem;
-    border: 2px solid #fff;
-    background-color: #fff;
-    border-radius: 0 0.375rem 0.375rem 0;
+.eye-pos-2{
+    bottom: 158px;
+ }
+ 
+.eye-pos-1{
+    bottom: 239px;
 }
 
 button{

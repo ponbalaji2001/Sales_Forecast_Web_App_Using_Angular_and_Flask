@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       if (user) {
         //Assign the name to userName Service
         this.userNameServ.user_name = this.fullname;
-        this.router.navigate(['datasetUpload']);
+        this.router.navigate(['forecast']);
       } else {
         alert('User not found');
       }

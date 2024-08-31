@@ -1,47 +1,69 @@
-<div class="LogoutBtn">
-<button type="submit" class="btn btn-primary btn-sm" (click)="logout()">Logout</button>
+<div class="header">
+    <h6 class="pt-1">Hi, {{name}}</h6>
+    <button type="submit" class="btn btn-primary btn-sm LogoutBtn" (click)="logout()">logout</button>
 </div>
 <div class="container">
-    <h5>Hi, {{name}}</h5>
-    <br>
     <div class="card">
         <div class="card-header">
            <h6>Upload your dataset</h6>
         </div>
         <div class="card-body">
-         <form (ngSubmit)="onsubmit()" #myForm="ngForm" action="/upload" method="POST" enctype = "multipart/form-data" v-on:change="Uploadfile">
+         <form (ngSubmit)="onsubmit()" #myForm="ngForm" action="/upload" method="POST" enctype = "multipart/form-data" v-on:change="Uploadfile" class="upload">
             <input type="file" (change)="uploadFile(file)" #file name="file" value="Upload file" ngModel required #_file="ngModel">
             <div>
                 <small *ngIf="_file.invalid && _file.touched">*File is required</small>
             </div>
-            <br>
           </form>
           <form (ngSubmit)="onsubmit()" #myForm="ngForm" action="/input" method="POST" enctype="multipart/form-data" >
-            <label class="form-label">Select Your Forecast Range</label>
-            <select class="form-select" aria-label="Default select example" name="rang" [(ngModel)]="rang" ngModel required #_rang="ngModel">
-                <option selected>select</option>
+            <label class="form-label">Dataset Period Type</label>
+            <select [ngClass]="datasetType==='select a value' ? 'select-placeholder form-select': 'form-select'" aria-label="Default select example" name="datasetType" [(ngModel)]="datasetType" ngModel required #_datasetType="ngModel">
+                <option selected hidden>select a value</option>
                 <option>Year</option>
                 <option>Month</option>
                 <option>Week</option>
                 <option>Day</option>
             </select>
             <div>
-                <small *ngIf="_rang.invalid && _rang.touched">*Forecast range is required</small>
+                <small *ngIf="_datasetType.invalid && _datasetType.touched">*Dataset type is required</small>
             </div>
-            <br>
-            <label class="form-label">Enter Your Forecast Value</label>
-            <input class="form-control" type="number" name="val" min="1" [(ngModel)]="val" ngModel required #_val="ngModel">
+            <label class="form-label input">Date Column Index</label>
+            <input class="form-control input" type="number" name="dateIndex" min="0" placeholder="enter a number" 
+                [(ngModel)]="dateIndex" ngModel required #_dateIndex="ngModel">
             <div>
-                <small *ngIf="_val.invalid && _val.touched">*Forecast value is required</small>
+                <small *ngIf="_dateIndex.invalid && _dateIndex.touched">*Date column index is required</small>
             </div>
-            <br>
-            <button type="submit" class="btn btn-primary" (click)=" submitData()"  [disabled]="!myForm.valid">SUBMIT</button>
+            <label class="form-label">Sales Column Index</label>
+            <input class="form-control input" type="number" name="salesIndex" min="0" placeholder="enter a number"
+                [(ngModel)]="salesIndex" ngModel required #_salesIndex="ngModel">
+            <div>
+                <small *ngIf="_salesIndex.invalid && _salesIndex.touched">*Sales column index is required</small>
+            </div>
+            <label class="form-label">Select Forecast Period</label>
+            <select [ngClass]="forecastPeriod==='select a value' ? 'select-placeholder form-select': 'form-select'" aria-label="Default select example" name="forecastPeriod" [(ngModel)]="forecastPeriod" ngModel required #_forecastPeriod="ngModel">
+                <option selected hidden>select a value</option>
+                <option>Year</option>
+                <option>Month</option>
+                <option>Week</option>
+                <option>Day</option>
+            </select>
+            <div>
+                <small *ngIf="_forecastPeriod.invalid && _forecastPeriod.touched">*Forecast Period is required</small>
+            </div>
+            <label class="form-label">Number of Periods</label>
+            <input class="form-control input" type="number" name="numberOfPeriod" min="1" placeholder="enter a number"
+                [(ngModel)]="numberOfPeriod" ngModel required #_numberOfPeriod="ngModel">
+            <div>
+                <small *ngIf="_numberOfPeriod.invalid && _numberOfPeriod.touched">*Number of Periods is required</small>
+            </div>
+            <button type="submit" class="btn btn-primary forecast-btn" (click)=" submitData()"  [disabled]="!myForm.valid">Forecast</button>
         </form>
-        <div *ngIf="show">
-            <br>
-            <span class="spinner-border spinner-border-sm"></span>
-            Processing data...
-        </div>
       </div>
+    </div>
+</div>
+
+<div *ngIf="show" class="loading">
+    <div class="loading-content">
+        <span class="spinner-border spinner-border-lg"></span>
+        <p>Processing data...</p>
     </div>
 </div>
