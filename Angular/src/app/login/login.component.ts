@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         this.userNameServ.user_name = this.fullname;
         this.router.navigate(['forecast']);
       } else {
-        alert('User not found');
+        alert('Invalid Credentials');
       }
     });
   }
