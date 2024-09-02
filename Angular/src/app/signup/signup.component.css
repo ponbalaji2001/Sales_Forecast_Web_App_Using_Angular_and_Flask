@@ -11,43 +11,46 @@
 
 .card h1,
 h6 {
-     color: #fff;
-}
-
-label,p{
     color: #fff;
 }
 
-label{
+label, p {
+    color: #fff;
+}
+
+label {
     margin-bottom: 3px;
 }
 
-a{
+a {
     color: #fff;
     margin-top: 10px;
 }
 
-input.ng-invalid.ng-touched{
-    border:red 1.6px solid;
+input.ng-invalid.ng-touched {
+    border: red 1.6px solid;
 }
 
-small{
+small {
     color: #fff;
 }
 
-.eye{
+.position-relative {
+    position: relative;
+}
+
+.eye {
     position: absolute;
-    right: 50px;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 
-.eye-pos-2{
-    bottom: 158px;
- }
- 
-.eye-pos-1{
-    bottom: 239px;
+.eye-pos {
+    top: 45px; 
 }
 
-button{
+button {
     margin-top: 10px;
 }

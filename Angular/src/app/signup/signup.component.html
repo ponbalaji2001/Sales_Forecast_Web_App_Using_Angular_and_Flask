@@ -4,42 +4,42 @@
             <div class="card">
                 <div class="text-center">
                     <h1>Sign Up</h1>
-                    <h6>Register Yourself !</h6>
+                    <h6>Register Yourself!</h6>
                 </div>
                 <form (ngSubmit)="onsubmit()" #myForm="ngForm">
-                    <div class="mb-3">
+                    <div class="mb-3 position-relative">
                         <label for="exampleFullName" class="form-label">Full Name</label>
                         <input type="text" [(ngModel)]="fullName" name="_Name" class="form-control" id="exampleFullName" ngModel required #sname="ngModel">
                         <div>
                             <small *ngIf="sname.invalid && sname.touched">(*name is required)</small>
                         </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 position-relative">
                         <label for="exampleEmail" class="form-label">Email address</label>
                         <input type="email" [(ngModel)]="email" name="_Email" class="form-control" id="exampleEmail" ngModel required email #semail="ngModel">
                         <div>
-                             <small *ngIf="semail.errors && semail.errors['required'] && semail.touched">(*email is required)</small>
-                             <small *ngIf="semail.errors && semail.errors['email'] && semail.touched">(*email is invalid)</small>
+                            <small *ngIf="semail.errors && semail.errors['required'] && semail.touched">(*email is required)</small>
+                            <small *ngIf="semail.errors && semail.errors['email'] && semail.touched">(*email is invalid)</small>
                         </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 position-relative">
                         <label for="examplePassword" class="form-label">Password</label>
-                        <input [type]="showpassword?'text':'password' " [(ngModel)]="password" name="_Password"
-                                class="form-control" id="examplePassword" ngModel required #spassword="ngModel">
-                        <i (click)="passwordShow()" class="fa fa-eye eye eye-pos-1" *ngIf="showpassword && !spassword.invalid"></i>
-                        <i (click)="passwordShow()" class="fa fa-eye-slash eye eye-pos-1" *ngIf="!showpassword && !spassword.invalid"></i>
+                        <input [type]="showpassword ? 'text' : 'password'" [(ngModel)]="password" name="_Password"
+                               class="form-control" id="examplePassword" ngModel required #spassword="ngModel">
+                        <i (click)="passwordShow()" class="fa fa-eye eye eye-pos" *ngIf="showpassword && !spassword.invalid"></i>
+                        <i (click)="passwordShow()" class="fa fa-eye-slash eye eye-pos" *ngIf="!showpassword && !spassword.invalid"></i>
                         <div>
-                          <small class="passValid" *ngIf="spassword.invalid && spassword.touched">(*password is required)</small>
+                            <small class="passValid" *ngIf="spassword.invalid && spassword.touched">(*password is required)</small>
                         </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 position-relative">
                         <label for="exampleConfirmPassword" class="form-label">Confirm Password</label>
-                        <input [type]="showConfirmPassword?'text':'password' " [(ngModel)]="confirmPassword" name="_ConfirmPassword" class="form-control"
-                            id="exampleConfirmPassword" ngModel required #sconfirmPassword="ngModel">
-                        <i (click)="confirmPasswordShow()" class="fa fa-eye eye eye-pos-2" *ngIf="showConfirmPassword && !sconfirmPassword.invalid"></i>
-                        <i (click)="confirmPasswordShow()" class="fa fa-eye-slash eye eye-pos-2" *ngIf="!showConfirmPassword && !sconfirmPassword.invalid"></i>
+                        <input [type]="showConfirmPassword ? 'text' : 'password'" [(ngModel)]="confirmPassword" name="_ConfirmPassword" class="form-control"
+                               id="exampleConfirmPassword" ngModel required #sconfirmPassword="ngModel">
+                        <i (click)="confirmPasswordShow()" class="fa fa-eye eye eye-pos" *ngIf="showConfirmPassword && !sconfirmPassword.invalid"></i>
+                        <i (click)="confirmPasswordShow()" class="fa fa-eye-slash eye eye-pos" *ngIf="!showConfirmPassword && !sconfirmPassword.invalid"></i>
                         <div>
-                                <small *ngIf="sconfirmPassword.invalid && sconfirmPassword.touched">(*confirm password is required)</small>
+                            <small *ngIf="sconfirmPassword.invalid && sconfirmPassword.touched">(*confirm password is required)</small>
                         </div>
                         <div>
                             <small class="confirmValid" *ngIf="(!spassword.invalid && !sconfirmPassword.invalid) && password !== confirmPassword">(*Password and Confirm Password must be same)</small>
