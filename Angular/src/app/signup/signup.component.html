@@ -8,14 +8,14 @@
                 </div>
                 <form (ngSubmit)="onsubmit()" #myForm="ngForm">
                     <div class="mb-3 position-relative">
-                        <label for="exampleFullName" class="form-label">Full Name</label>
+                        <label for="exampleFullName" class="form-label">Name</label>
                         <input type="text" [(ngModel)]="fullName" name="_Name" class="form-control" id="exampleFullName" ngModel required #sname="ngModel">
                         <div>
                             <small *ngIf="sname.invalid && sname.touched">(*name is required)</small>
                         </div>
                     </div>
                     <div class="mb-3 position-relative">
-                        <label for="exampleEmail" class="form-label">Email address</label>
+                        <label for="exampleEmail" class="form-label">Email</label>
                         <input type="email" [(ngModel)]="email" name="_Email" class="form-control" id="exampleEmail" ngModel required email #semail="ngModel">
                         <div>
                             <small *ngIf="semail.errors && semail.errors['required'] && semail.touched">(*email is required)</small>
