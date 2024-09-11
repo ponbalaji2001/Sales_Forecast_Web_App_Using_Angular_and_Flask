@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from werkzeug.utils import secure_filename
 import os
 from flask_cors import CORS
@@ -18,7 +18,29 @@ def upload_dataset():
     file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)), app.config['UPLOAD_FOLDER'], fileName))
     return jsonify({'Flask': 'File uploaded'})
 
-#Get the forecast range and value from Angular
+#Get forecast data
+app.config['DOWNLOAD_FOLDER'] = 'static/result'
+@app.route('/download', methods=['GET'])
+def download_file():
+    try:
+        filename = 'Forecast_Result.csv'
+        file_path = os.path.join(app.config['DOWNLOAD_FOLDER'], filename)
+
+        # Check if the file exists
+        if os.path.isfile(file_path):
+            return send_from_directory(
+                directory=app.config['DOWNLOAD_FOLDER'],
+                path=filename,
+                as_attachment=True
+            )
+        else:
+            return jsonify({'error': 'File not found'}), 404
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return jsonify({'error': 'Internal Server Error'}), 500
+
+
+#Get the forecast results
 @app.route('/forecast', methods=['GET', 'POST'])
 def forecast():
     j = request.get_json()
@@ -27,9 +49,8 @@ def forecast():
     salesIndex = j['salesIndex']
     forecastPeriod = j['forecastPeriod']
     numberOfPeriod = j['numberOfPeriod']
-    print(datasetType, dateIndex, salesIndex, forecastPeriod, numberOfPeriod)
 
-    #call the prophet function based on the forecast range for forecasting
+    #call the prophet function based on the forecast period for forecasting
     if forecastPeriod == "Year":
         if datasetType == "Year":
             d, p, a, f, u, l, h, r, ms, ma = Forecast(fileName, datasetType, dateIndex, salesIndex, numberOfPeriod)

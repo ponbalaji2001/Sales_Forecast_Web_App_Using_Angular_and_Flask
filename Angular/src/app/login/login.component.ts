@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  //Check if the user data is present in the JSON server
+  //Check if the user credentials is present in the JSON server
   login() {
     this.http.get<any>('http://localhost:3000/UserData').subscribe((res) => {
       console.log(res);

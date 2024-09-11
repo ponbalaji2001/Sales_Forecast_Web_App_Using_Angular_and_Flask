@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { jsPDF } from 'jspdf';
 import  html2canvas  from 'html2canvas';
 import { ChartDataService } from '../services/chartDataService.service';
+import { FileDownloadService } from '../services/fileDownloadService.service';
 
 @Component({
   selector: 'app-mychart',
@@ -11,7 +12,8 @@ import { ChartDataService } from '../services/chartDataService.service';
 
 export class MychartComponent implements OnInit {
   constructor(
-    private chartDataServ: ChartDataService
+    private chartDataService: ChartDataService,
+    private fileDownloadService: FileDownloadService
   ) {}
 
   @ViewChild('content', { static: false }) el!: ElementRef;
@@ -37,16 +39,16 @@ export class MychartComponent implements OnInit {
   ngOnInit(): void {
     
     //Get the data from the Chart Service and convert it to an array.
-    this.dateArray = String(this.chartDataServ._date).split(/,(?= \d{2} )/);
-    this.predictArray = String(this.chartDataServ.predict).split(',');
-    this.forecastArray = String(this.chartDataServ.forecastVal).split(',');
-    this.forecastUpArray = String(this.chartDataServ.forecastUp).split(',');
-    this.forecastDownArray = String(this.chartDataServ.forecastDown).split(',');
-    this.actualArray = String(this.chartDataServ.actual).split(',');
-    this.horizonArray = String(this.chartDataServ.horizon).split(',');
-    this.rmseArray = String(this.chartDataServ.rmse).split(',');
-    this.mseArray = String(this.chartDataServ.mse).split(',');
-    this.maeArray = String(this.chartDataServ.mae).split(',');
+    this.dateArray = String(this.chartDataService._date).split(/,(?= \d{2} )/);
+    this.predictArray = String(this.chartDataService.predict).split(',');
+    this.forecastArray = String(this.chartDataService.forecastVal).split(',');
+    this.forecastUpArray = String(this.chartDataService.forecastUp).split(',');
+    this.forecastDownArray = String(this.chartDataService.forecastDown).split(',');
+    this.actualArray = String(this.chartDataService.actual).split(',');
+    this.horizonArray = String(this.chartDataService.horizon).split(',');
+    this.rmseArray = String(this.chartDataService.rmse).split(',');
+    this.mseArray = String(this.chartDataService.mse).split(',');
+    this.maeArray = String(this.chartDataService.mae).split(',');
 
     console.log(this.forecastArray);
 
@@ -151,14 +153,26 @@ export class MychartComponent implements OnInit {
   }
   
   //download report
-  makePDF() {
+  downloadReport() {
+    //Download Chart as PDF
     html2canvas(document.getElementById('content')!).then((canvas) => {
       const contentURL = canvas.toDataURL('http://localhost:4200/chart');
       let pdf = new jsPDF('p', 'mm', 'a4');
       var width = pdf.internal.pageSize.getWidth();
       var height = (canvas.height * width) / canvas.width;
       pdf.addImage(contentURL, 'PNG', 0, 39, width, height);
-      pdf.save('ForecastReport.pdf');
+      pdf.save('Forecast_Report.pdf');
+    });
+
+    //Download Data as Excel
+    this.fileDownloadService.downloadFile().subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Forecast_Result.csv'; 
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
     });
   }
 }

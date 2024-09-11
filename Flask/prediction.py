@@ -62,7 +62,7 @@ def Forecast(fileName, datasetType, dateIndex, salesIndex, value):
     df3 = df3[['ds', 'yhat', 'yhat_upper', 'yhat_lower', 'trend']]
 
     df4 = pd.concat([df, df3], ignore_index=True)
-    df4.fillna('NAN', inplace=True)
+    df4.fillna('NaN', inplace=True)
   
     predictDate = predictFuture['ds']
     predictValue = df2['yhat']
@@ -72,9 +72,12 @@ def Forecast(fileName, datasetType, dateIndex, salesIndex, value):
     forecastLower = df4['yhat_lower']
     
     #saving the forecasted dataframe as a csv file for creating a Power BI dashboard
-    prediction = predictFuture[['ds','trend','yhat']]
-    prediction = prediction.join(df3[['yhat_upper','yhat_lower']])
+    prediction = predictFuture[['ds']]
     prediction = prediction.join(df['y'])
+    prediction = prediction.join(df2['yhat'], rsuffix='_df2')
+    prediction = prediction.join(df4[['yhat','yhat_upper','yhat_lower']], rsuffix='_df4')
+    prediction = prediction.join(predictFuture['trend'])
+    prediction.columns = ['date', 'sales', 'prediction', 'forecast', 'upperbound', 'lowerbound', 'trend'] 
     prediction.to_csv('./static/result/Forecast_Result.csv', index=False)
 
     #Determine Performance Metrics
